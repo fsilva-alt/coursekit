@@ -35,7 +35,7 @@ DEFAULTS: Dict[str, Any] = {
     "authors": [],
     "updated": "auto",
     "language": "en",
-    "accent": "#5b50e6",
+    "accent": "#155e75",
     "accent_dark": None,
     "logo": None,
     "favicon": None,
@@ -43,7 +43,7 @@ DEFAULTS: Dict[str, Any] = {
     "finish_url": None,
     "edit_url": None,
     "numbering": "course",          # course | part | none
-    "transition": "slide",          # slide | fade | none
+    "transition": "none",           # none | fade | slide
     "highlight": True,
     "line_numbers": False,
     "embed_images": True,

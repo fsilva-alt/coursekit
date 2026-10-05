@@ -115,10 +115,10 @@ def render_about(course: Course, md) -> str:
     text = cfg.get("description") or cfg.get("subtitle") or ""
     intro = f'<div class="about-text">{md.render(str(text), {"labels": L, "counters": {}, "slugs": set()})}</div>' \
         if text else ""
-    return (f'<details class="about"><summary>{icon("book")}<span>{esc(L["about"])}</span>'
+    return (f'<details class="about"><summary><span>{esc(L["about"])}</span>'
             f'{icon("chevron-down", "about-chevron")}</summary><div class="about-body">{intro}'
             f'<dl class="about-meta">{meta}</dl><button class="about-reset" type="button" '
-            f'data-reset-progress>{icon("reset")}{esc(L["reset_progress"])}</button></div></details>')
+            f'data-reset-progress>{esc(L["reset_progress"])}</button></div></details>')
 
 
 def render_toc(course: Course) -> str:
@@ -157,15 +157,14 @@ def render_chapter(course: Course, ch: Chapter, md, env: Dict[str, Any]) -> str:
         tip = f' title="{esc(part.description)}"' if part.description else ""
         kicker.append(f'<span class="chapter-part"{tip}>{esc(L["part"].format(n=part.number))}'
                       f'<span class="sep" aria-hidden="true">·</span>{esc(part.title)}</span>')
-    kicker.append(f'<span class="chapter-time">{icon("clock")}'
-                  f'{esc(L["minutes"].format(n=ch.duration))}</span>')
+    kicker.append(f'<span class="chapter-time">{esc(L["minutes"].format(n=ch.duration))}</span>')
     number = f'<span class="chapter-num">{esc(ch.number)}.</span> ' if ch.number else ""
     title = md.renderInline(ch.title, inline_env(env))
     foot = ""
     if cfg.get("edit_url"):
         url = str(cfg["edit_url"]).replace("{path}", ch.rel).replace("{id}", ch.id)
         foot = (f'<footer class="chapter-foot"><a class="edit-link" href="{esc(url)}" '
-                f'target="_blank" rel="noopener">{icon("edit")}{esc(L["edit"])}</a></footer>')
+                f'target="_blank" rel="noopener">{esc(L["edit"])}</a></footer>')
     return (f'<section class="chapter" id="{esc(ch.id)}" data-index="{ch.index}" '
             f'aria-labelledby="{esc(ch.id)}-title">'
             f'<header class="chapter-head"><p class="chapter-kicker">{"".join(kicker)}</p>'

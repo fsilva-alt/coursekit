@@ -17,7 +17,6 @@ from pygments.lexers import get_lexer_by_name
 from pygments.token import STANDARD_TYPES
 from pygments.util import ClassNotFound
 
-from .icons import icon
 
 PLAIN = {"", "text", "txt", "plain", "plaintext", "none", "nohighlight", "output"}
 
@@ -138,15 +137,14 @@ def render_code(code: str, lang: str, opts: Dict[str, str], *, highlight: bool =
     name = language_name(lang)
     head = []
     if title:
-        head.append(f'<span class="code-title">{icon("file")}'
-                    f'<span>{html.escape(title)}</span></span>')
+        head.append(f'<span class="code-title"><span>{html.escape(title)}</span></span>')
         if name:
             head.append(f'<span class="code-lang code-lang-muted">{html.escape(name)}</span>')
     elif name:
         head.append(f'<span class="code-lang">{html.escape(name)}</span>')
     head.append(
         f'<button class="code-copy" type="button" aria-label="{html.escape(labels.get("copy_code", "Copy code"))}">'
-        f'{icon("copy")}{icon("check")}<span class="code-copy-text">{html.escape(labels.get("copy", "Copy"))}</span></button>'
+        f'<span class="code-copy-text">{html.escape(labels.get("copy", "Copy"))}</span></button>'
     )
 
     body = "\n".join(

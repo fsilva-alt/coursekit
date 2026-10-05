@@ -4,7 +4,7 @@ The rendering tool for step-by-step courses. Write a course as a folder of Markd
 coursekit turns it into a **single self-contained `index.html`**:
 
 - chapters on the left, one chapter at a time on the right
-- Back/Next with slide transitions, progress and time remaining
+- Back/Next at the end of each chapter, progress and time remaining
 - light/dark mode
 - everything (styles, scripts, images — even remote ones) embedded in the file
 

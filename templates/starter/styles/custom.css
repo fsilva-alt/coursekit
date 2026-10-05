@@ -2,7 +2,7 @@
    Redefine design tokens or add your own classes (see the Authoring Guide course). */
 
 :root {
-  /* --content-w: 880px; */   /* default 100%: chapters fill the available width */
+  /* --content-w: 880px; */   /* default 85% of the available width (100% on phones) */
   /* --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif; */
 }
 

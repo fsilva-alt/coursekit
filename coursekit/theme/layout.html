@@ -39,7 +39,7 @@
   {{ home_link }}
   <a class="brand" href="#{{ first_chapter }}">{{ brand_mark }}<span class="brand-title">{{ course_title }}</span></a>
   <div class="topbar-spacer"></div>
-  <span class="chip time-chip">{{ icon.clock }}<span data-time-left>{{ time_total }}</span></span>
+  <span class="chip time-chip"><span data-time-left>{{ time_total }}</span></span>
   <button class="icon-btn theme-toggle" type="button" data-theme-toggle
           aria-label="{{ label.toggle_theme }}" title="{{ label.toggle_theme }}">{{ icon.moon }}{{ icon.sun }}</button>
   <div class="progress" role="progressbar" aria-label="{{ label.progress }}" aria-valuemin="0"
@@ -52,7 +52,7 @@
       {{ about }}
       <nav class="toc" aria-label="{{ label.chapters }}">{{ toc }}</nav>
     </div>
-    <div class="sidebar-foot">{{ icon.clock }}<span data-time-left>{{ time_total }}</span></div>
+    <div class="sidebar-foot"><span data-time-left>{{ time_total }}</span></div>
   </aside>
   <div class="scrim" data-scrim></div>
 

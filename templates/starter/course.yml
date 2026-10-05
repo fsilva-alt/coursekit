@@ -13,8 +13,8 @@ updated: auto             # auto = date of the most recently edited chapter, or 
 language: en              # interface language: en, pt, es (override strings with `labels:`)
 
 # --- look & feel --------------------------------------------------------------
-accent: "#5b50e6"         # brand colour (light mode)
-# accent_dark: "#a29bff"  # optional; by default a lighter tint of `accent`
+accent: "#155e75"         # brand colour (light mode); avoid purple
+# accent_dark: "#7fb3c4"  # optional; by default a lighter tint of `accent`
 # logo: assets/logo.svg   # shown in the top bar (and used as favicon)
 # favicon: assets/icon.png
 # home_url: https://example.org/my-course   # optional back arrow in the top bar (e.g. your LMS page)
@@ -22,7 +22,7 @@ accent: "#5b50e6"         # brand colour (light mode)
 # edit_url: https://github.com/you/my-course/edit/main/{path}   # {path} = chapter file in this repo
 
 numbering: course         # course (1, 2, 3 …) | part (1.1, 1.2 …) | none
-transition: slide         # slide | fade | none — animation between chapters
+transition: none          # none | fade | slide — animation between chapters
 
 # --- content ------------------------------------------------------------------
 highlight: true           # syntax highlighting at build time

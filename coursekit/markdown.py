@@ -33,7 +33,7 @@ from mdit_py_plugins.tasklists import tasklists_plugin
 
 from .config import Course, slugify, unique_slug
 from .highlight import parse_info, render_code
-from .icons import CALLOUT_ICONS, icon
+from .icons import icon
 
 CALLOUTS = {
     # kind: visual style
@@ -118,7 +118,7 @@ def create_markdown(course: Course) -> MarkdownIt:
         style = CALLOUTS[kind]
         label = inline(title, env) if title else _esc(env["labels"].get(kind, kind.title()))
         return (f'<div class="callout callout-{style}" data-kind="{kind}" role="note">'
-                f'<div class="callout-title">{icon(CALLOUT_ICONS[kind])}<span>{label}</span></div>'
+                f'<div class="callout-title"><span>{label}</span></div>'
                 f'<div class="callout-body">\n')
 
     def make_callout(kind: str):
@@ -141,10 +141,6 @@ def create_markdown(course: Course) -> MarkdownIt:
             title = _rest(tok.info, kind)
             summary = inline(title, env) if title else _esc(env["labels"][kind])
             lead = icon("chevron-right", "details-chevron")
-            if kind == "hint":
-                lead += icon("bulb", "details-kind")
-            elif kind == "solution":
-                lead += icon("check-circle", "details-kind")
             return (f'<details class="details details-{kind}"><summary>{lead}'
                     f'<span>{summary}</span></summary><div class="details-body">\n')
         return render
@@ -221,7 +217,7 @@ def create_markdown(course: Course) -> MarkdownIt:
             return "</div></div>\n"
         question = _rest(tok.info, "quiz")
         return (f'<div class="quiz" data-quiz><div class="quiz-head">'
-                f'<span class="quiz-badge">{icon("question")}{_esc(env["labels"]["quiz"])}</span>'
+                f'<span class="quiz-badge">{_esc(env["labels"]["quiz"])}</span>'
                 f'<div class="quiz-question">{inline(question, env)}</div></div>'
                 f'<div class="quiz-body">\n')
 
