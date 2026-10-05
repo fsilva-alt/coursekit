@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------------------
+# Course settings. Only `title` is required; everything else has a default.
+# Paths are relative to this folder.
+# ---------------------------------------------------------------------------
+
+title: "My New Course"
+subtitle: One sentence that says what learners will be able to do.
+description: >
+  A short paragraph shown in "About this course". Markdown is allowed here.
+authors:                  # or `author: Jane Doe`
+  - Your Name
+updated: auto             # auto = date of the most recently edited chapter, or 2026-10-04
+language: en              # interface language: en, pt, es (override strings with `labels:`)
+
+# --- look & feel --------------------------------------------------------------
+accent: "#5b50e6"         # brand colour (light mode)
+# accent_dark: "#a29bff"  # optional; by default a lighter tint of `accent`
+# logo: assets/logo.svg   # shown in the top bar (and used as favicon)
+# favicon: assets/icon.png
+# home_url: https://example.org/my-course   # optional back arrow in the top bar (e.g. your LMS page)
+# finish_url: https://example.org/next-course   # where "Finish" goes (default: a toast)
+# edit_url: https://github.com/you/my-course/edit/main/{path}   # {path} = chapter file in this repo
+
+numbering: course         # course (1, 2, 3 …) | part (1.1, 1.2 …) | none
+transition: slide         # slide | fade | none — animation between chapters
+
+# --- content ------------------------------------------------------------------
+highlight: true           # syntax highlighting at build time
+line_numbers: false       # default for code blocks (per block: linenums / nolinenums)
+embed_images: true        # embed every <img> as a data: URI
+embed_external_images: true   # also download and embed http(s) images
+external_links_new_tab: true
+typographer: true         # “smart quotes” and dashes
+
+# Parts and chapters are discovered from chapters/: each sub-folder is a part
+# (title in its _part.yml) and each .md file inside is a chapter, in file-name order.
+# You can list them explicitly instead (globs allowed):
+#
+# parts:
+#   - title: Introduction
+#     description: Optional one-liner.
+#     chapters:
+#       - chapters/01-introduction/*.md
+#   - title: Wrap-up
+#     chapters: [chapters/02-wrap-up/01-summary.md]
+#
+# …or, for a course without parts:
+# chapters:
+#   - chapters/*.md
+
+# --- customisation --------------------------------------------------------------
+styles:                   # inlined after the base theme (add or override definitions)
+  - styles/custom.css
+replace_base_styles: false   # true = use only your stylesheets
+scripts:                  # inlined after the runtime (.mjs files become modules)
+  - scripts/custom.js
+# head: partials/head.html    # raw HTML added to <head>
+# layout: layout.html         # your own copy of coursekit/theme/layout.html
+# labels:                     # override any interface string
+#   next: Continue
+#   finish: Done!
+# slug: my-course             # key for readers' saved progress (default: this folder's name)

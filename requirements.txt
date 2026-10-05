@@ -1,0 +1,4 @@
+markdown-it-py[linkify]>=3,<5
+mdit-py-plugins>=0.4
+Pygments>=2.15
+PyYAML>=6

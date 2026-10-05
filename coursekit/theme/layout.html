@@ -1,0 +1,77 @@
+<!doctype html>
+<!--
+  coursekit page layout. Copy this file into a course and point `layout:` in course.yml at it
+  to customise the page structure. Placeholders are written in double curly braces: a value
+  (title, toc, chapters …), label.<key> for an interface string, or icon.<name> for an icon.
+-->
+<html lang="{{ lang }}" class="no-js" data-theme="light" data-nav="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="generator" content="coursekit {{ version }}">
+<meta name="color-scheme" content="light dark">
+{{ favicon }}
+<script>
+  /* Runs before first paint: theme + responsive navigation mode, so nothing flickers. */
+  (function () {
+    var d = document.documentElement, theme, sidebar;
+    d.className = d.className.replace('no-js', 'js');
+    try { theme = localStorage.getItem('coursekit:theme'); sidebar = localStorage.getItem('coursekit:sidebar'); } catch (e) {}
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    d.setAttribute('data-theme', theme);
+    var w = window.innerWidth;
+    d.setAttribute('data-nav', w >= 1100 ? (sidebar === 'collapsed' ? 'rail' : 'full') : (w >= 760 ? 'rail' : 'hidden'));
+  })();
+</script>
+{{ styles }}
+{{ head }}
+</head>
+<body>
+<a class="skip-link" href="#main">{{ label.skip_to_content }}</a>
+
+<header class="topbar">
+  <button class="icon-btn" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="true"
+          aria-label="{{ label.toggle_sidebar }}" title="{{ label.toggle_sidebar }}">{{ icon.panel }}</button>
+  {{ home_link }}
+  <a class="brand" href="#{{ first_chapter }}">{{ brand_mark }}<span class="brand-title">{{ course_title }}</span></a>
+  <div class="topbar-spacer"></div>
+  <span class="chip time-chip">{{ icon.clock }}<span data-time-left>{{ time_total }}</span></span>
+  <button class="icon-btn theme-toggle" type="button" data-theme-toggle
+          aria-label="{{ label.toggle_theme }}" title="{{ label.toggle_theme }}">{{ icon.moon }}{{ icon.sun }}</button>
+  <div class="progress" role="progressbar" aria-label="{{ label.progress }}" aria-valuemin="0"
+       aria-valuemax="{{ chapter_count }}" aria-valuenow="1"><span class="progress-bar" data-progress-bar></span></div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="{{ label.chapters }}">
+    <div class="sidebar-scroll">
+      {{ about }}
+      <nav class="toc" aria-label="{{ label.chapters }}">{{ toc }}</nav>
+    </div>
+    <div class="sidebar-foot">{{ icon.clock }}<span data-time-left>{{ time_total }}</span></div>
+  </aside>
+  <div class="scrim" data-scrim></div>
+
+  <main class="main" id="main" tabindex="-1">
+    <div class="stage" data-stage>
+{{ chapters }}
+    </div>
+    <nav class="pager" aria-label="{{ label.chapters }}">
+      <button class="pager-btn pager-prev" type="button" data-prev>{{ icon.chevron-left }}<span>{{ label.back }}</span></button>
+      <button class="pager-btn pager-next" type="button" data-next>
+        <span class="pager-text"><span class="pager-kicker" data-next-label>{{ label.next }}</span><span class="pager-title" data-next-title></span></span>
+        {{ icon.chevron-right }}
+      </button>
+    </nav>
+  </main>
+</div>
+
+<div class="toast" role="status" aria-live="polite" data-toast></div>
+<script type="application/json" id="course-data">{{ course_data }}</script>
+{{ scripts }}
+</body>
+</html>

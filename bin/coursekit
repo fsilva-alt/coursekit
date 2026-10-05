@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+# coursekit launcher: runs the tool from this repository with its own virtual environment
+# (.venv), which is created on first use and refreshed whenever requirements.txt changes.
+#
+#   coursekit build [course …]      build <course>/dist/index.html (default: current folder)
+#   coursekit dev [course]          preview with live reload
+#   coursekit new <name>            create a new course folder (in the current folder)
+#
+# Courses normally call this through their own ./build.sh.
+set -e
+
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+VENV="$ROOT/.venv"
+
+venv_python() {
+  if [ -x "$VENV/bin/python" ]; then echo "$VENV/bin/python"; else echo "$VENV/Scripts/python.exe"; fi
+}
+
+PY=$(venv_python)
+# (compared with plain sh: `cmp`/`diff` aren't installed everywhere)
+if [ ! -x "$PY" ] || [ "$(cat "$ROOT/requirements.txt")" != "$(cat "$VENV/.requirements.txt" 2>/dev/null)" ]; then
+  echo "coursekit: preparing $VENV (first run or updated requirements) ..." >&2
+  if [ ! -x "$PY" ]; then
+    BASE="${PYTHON:-python3}"
+    if ! "$BASE" -c 'import sys; sys.exit(sys.version_info < (3, 9))' 2>/dev/null; then
+      echo "coursekit: needs Python 3.9 or newer (set PYTHON=/path/to/python3)." >&2
+      exit 1
+    fi
+    "$BASE" -m venv "$VENV"
+    PY=$(venv_python)
+  fi
+  "$PY" -m pip install --quiet --disable-pip-version-check -r "$ROOT/requirements.txt"
+  cp "$ROOT/requirements.txt" "$VENV/.requirements.txt"
+fi
+
+# Import the package straight from this checkout, so edits to coursekit apply immediately.
+exec "$PY" -c 'import sys; sys.path.insert(0, sys.argv.pop(1)); from coursekit.cli import main; sys.exit(main(sys.argv[1:]))' "$ROOT" "$@"

@@ -1,0 +1,4 @@
+# Build output and caches (rebuild with ./build.sh)
+dist/
+.cache/
+.DS_Store
